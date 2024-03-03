@@ -1,9 +1,10 @@
 body
 {
-    background-color: aliceblue;
+    cursor: url(cursor.png) 3 3, default;
+    background-color: rgb(207, 228, 247);
 }
 
-
+/* full screen div */
 div.fullscreen-div
 {
     position: fixed;
@@ -13,6 +14,7 @@ div.fullscreen-div
     right: 0;
 }
 
+/* loader */
 div.loader
 {
     --loder-back-size: 15vmax;
@@ -40,7 +42,7 @@ div.loader-back
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 5%;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 1.5vmax rgba(0, 0, 0, 0.4);
 
     opacity: 1;
     animation: loader-back-animation 2s;
@@ -71,7 +73,7 @@ div.loader-tips>p
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     vertical-align: middle;
-    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+    text-shadow: 1px 1px 1vmax rgba(0, 0, 0, 0.4);
     animation: loader-tips-breath 5s ease infinite;
 }
 
@@ -96,11 +98,9 @@ div.loader-container
 {
     position: absolute;
     z-index: 1;
-
     height: 100%;
     width: 100%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5) inset;
-
+    box-shadow: 0px 0px 1vmax rgba(0, 0, 0, 0.5) inset;
 }
 
 div.loader-container table
@@ -140,6 +140,108 @@ div.loader-matrix
 
     background: #39c5bb;
     animation: matrix-animation 5s infinite;
+}
+
+/* cursor */
+div.cursor-outer
+{
+    --cursor-unit: 0.2vmax;
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    height: 2vmax;
+    width: 2vmax;
+    transform-origin: left top;
+    transform: translate(-50%, -50%);
+    transition: top 50ms, left 50ms, height 0.3s ease, width 0.3s ease, background-color 0.3s ease;
+    background-color: transparent;
+    animation: cursor-point-rotate 4s linear infinite;
+    z-index: 3939;
+}
+
+div.cursor-outer div.cursor-inner-warp
+{
+    position: absolute;
+    pointer-events: inherit;
+    top: 0px; left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+div.cursor-outer div.cursor-inner
+{
+    position: absolute;
+    pointer-events: inherit;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #39c5bb;
+    width: calc(var(--cursor-unit) * 2);
+    height: calc(var(--cursor-unit) * 2);
+    border-radius: 50%;
+    border-width: var(--cursor-unit);
+    box-shadow: 0px 0px calc(var(--cursor-unit)) rgba(0, 0, 0, 0.4);
+}
+
+@keyframes cursor-point-rotate{
+    0%      {rotate: 0deg;}
+    100%    {rotate: 360deg;}
+}
+
+/* button */
+div.css-button
+{
+    --button-unit: 4em;
+    position: absolute;
+    cursor: inherit;
+    background-color: transparent;
+    height: var(--button-unit);
+    width: calc(var(--button-unit) * 2.5);
+}
+
+div.css-button button
+{
+    position: absolute;
+    cursor: inherit;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    border-color: #39c5bb;
+    border-style: solid;
+    border-width: 0.5vmax;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5em;
+    color: #39c5bb;
+    font-weight: bold;
+    background-color: transparent;
+    transition: box-shadow 0.3s, text-shadow 0.3s, background-color 0.2s, color 0.2s;
+}
+
+div.css-button button:hover
+{
+    color: #5fc6bf;
+    text-shadow: 0px 0px 0.2vmax rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 0.4vmax rgba(0, 0, 0, 0.4);
+    background-color: #30afa6;
+    animation: button-color 3s 0.2s ease infinite;
+}
+
+div.css-button button:active
+{
+    color: #2ebcb3;
+    box-shadow: 0px 0px 0.1vmax rgba(0, 0, 0, 0.5);
+    text-shadow: 0px 0px 0.2vmax rgba(0, 0, 0, 0.4);
+    animation: none;
+    background-color: #109f95;
+}
+
+@keyframes button-color
+{
+    0%      {background-color: #30afa6;}
+    50%     {background-color: #13a39a;}
+    100%    {background-color: #30afa6;}
 }
 
 @keyframes matrix-animation
