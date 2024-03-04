@@ -2,7 +2,7 @@ cursor_left = 0.0;
 cursor_top = 0.0;
 var motion_arg = 0.4;
 var point_cnt = 10;
-var inClickable = 0, isPressed = 0;
+var inClickable = 0, isPressed = 0, movaBle = 1;
 
 function abs(_var){
     return _var > 0 ? _var : -_var;
@@ -39,6 +39,7 @@ addEventListener('load', function(){
 
     cursor_effect.addEventListener('animationiteration', () => {
         cursor_effect.style.animationPlayState = 'paused';
+        movaBle = 1
     });
 
     const selects = document.querySelectorAll('.clickable');
@@ -89,9 +90,12 @@ addEventListener('load', function(){
                 cursor_outer.style.width = '1.2vmax';
             }
             else{
-                cursor_effect.style.top = ev.clientY + 'px';
-                cursor_effect.style.left = ev.clientX + 'px';
-                cursor_effect.style.animationPlayState = 'running';
+                if (movaBle > 0){
+                    cursor_effect.style.top = ev.clientY + 'px';
+                    cursor_effect.style.left = ev.clientX + 'px';
+                    cursor_effect.style.animationPlayState = 'running';
+                    movaBle = 0
+                }
             }
         }
     })
