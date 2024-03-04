@@ -1,20 +1,45 @@
-cursor_left = 0;
-cursor_top = 0;
+cursor_left = 0.0;
+cursor_top = 0.0;
 var motion_arg = 0.4;
 var point_cnt = 10;
-var inClickable = 0;
+var inClickable = 0, isPressed = 0;
+
+function abs(_var){
+    return _var > 0 ? _var : -_var;
+}
 
 addEventListener('load', function(){
     var onPC = /windows/i.test(navigator.userAgent);
     if (!onPC) return;
-
+    
+    let cursor_contain = document.createElement('div')
+    cursor_contain.className = 'cursor-container';
     let cursor_outer = document.createElement('div');
     cursor_outer.className = 'cursor-outer';
-    cursor_outer.style.top = '0px';
-    cursor_outer.style.left = '0px';
-    desttop = cursor_outer.offsetTop;
-    destleft = cursor_outer.offsetLeft;
-    document.body.appendChild(cursor_outer);
+    let cursor_circle = this.document.createElement('div');
+    cursor_circle.className = 'cursor-circle';
+    let cursor_effect = this.document.createElement('div');
+    cursor_effect.className = 'cursor-effect';
+
+    cursor_circle.style.opacity = 1;
+    cursor_outer.style.opacity = 0;
+    cursor_effect.style.animationPlayState = 'paused';
+
+    cursor_contain.style.top = '0px';
+    cursor_contain.style.left = '0px';
+
+    desttop = cursor_contain.offsetTop;
+    destleft = cursor_contain.offsetLeft;
+
+    cursor_contain.appendChild(cursor_outer);
+    cursor_contain.appendChild(cursor_circle);
+    
+    document.body.appendChild(cursor_contain);
+    this.document.body.appendChild(cursor_effect);
+
+    cursor_effect.addEventListener('animationiteration', () => {
+        cursor_effect.style.animationPlayState = 'paused';
+    });
 
     const selects = document.querySelectorAll('.clickable');
     selects.forEach(element => {
@@ -22,11 +47,21 @@ addEventListener('load', function(){
             inClickable += 1;
             cursor_outer.style.height = '3.5vmax';
             cursor_outer.style.width = '3.5vmax';
+            cursor_circle.style.height = '3.5vmax';
+            cursor_circle.style.width = '3.5vmax';
+            cursor_circle.style.opacity = 0;
+            cursor_outer.style.opacity = 1;
         });
         element.addEventListener('mouseleave', function(){
             inClickable -= 1;
-            cursor_outer.style.height = '2vmax';
-            cursor_outer.style.width = '2vmax';
+            if (isPressed <= 0){
+                cursor_outer.style.height = '2vmax';
+                cursor_outer.style.width = '2vmax';
+                cursor_circle.style.height = '2.3vmax';
+                cursor_circle.style.width = '2.3vmax';
+                cursor_circle.style.opacity = 1;
+                cursor_outer.style.opacity = 0;
+            }
         });
     });
 
@@ -41,34 +76,50 @@ addEventListener('load', function(){
         cursor_outer.appendChild(newWarp);
     }
 
-    addEventListener('mousemove', function(ev){
+    document.addEventListener('mousemove', function(ev){
         cursor_left = ev.clientX;
         cursor_top = ev.clientY;
     })
     
     addEventListener('mousedown', (ev)=>{
         if (ev.button === 0){
-            cursor_outer.style.height = '1.2vmax';
-            cursor_outer.style.width = '1.2vmax';
+            isPressed = 1;
+            if (inClickable > 0){
+                cursor_outer.style.height = '1.2vmax';
+                cursor_outer.style.width = '1.2vmax';
+            }
+            else{
+                cursor_effect.style.top = ev.clientY + 'px';
+                cursor_effect.style.left = ev.clientX + 'px';
+                cursor_effect.style.animationPlayState = 'running';
+            }
         }
     })
     
     addEventListener('mouseup', (ev)=>{
         if (ev.button === 0){
+            isPressed = 0;
             if (inClickable > 0){
                 cursor_outer.style.height = '3.5vmax';
                 cursor_outer.style.width = '3.5vmax';
             } else{
                 cursor_outer.style.height = '2vmax';
                 cursor_outer.style.width = '2vmax';
+                cursor_circle.style.height = '2.3vmax';
+                cursor_circle.style.width = '2.3vmax';
+                cursor_circle.style.opacity = 1;
+                cursor_outer.style.opacity = 0;
             }
         }
     })
 
     setInterval(function(){
-        destleft += (cursor_left - destleft) * motion_arg;
-        desttop += (cursor_top - desttop) * motion_arg;
-        cursor_outer.style.left = destleft + 'px';
-        cursor_outer.style.top = desttop + 'px';
+        if ( abs(destleft - cursor_left) <= 1){ destleft = cursor_left; }
+        else{ destleft += (cursor_left - destleft) * motion_arg; }
+        if ( abs(desttop - cursor_top) <= 1){ desttop = cursor_top; }
+        else{ desttop += (cursor_top - desttop) * motion_arg; }
+        cursor_contain.style.left = destleft + 'px';
+        cursor_contain.style.top = desttop + 'px';
     }, 25);
+
 })
