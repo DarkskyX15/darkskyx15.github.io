@@ -1,10 +1,11 @@
 cursor_left = 0;
 cursor_top = 0;
 var motion_arg = 0.4;
-var point_cnt = 6;
+var point_cnt = 12;
 var inClickable = 0;
 
 addEventListener('load', function(){
+    console.log(navigator.userAgent)
     cursor_outer = document.getElementById('couter');
     desttop = cursor_outer.offsetTop;
     destleft = cursor_outer.offsetLeft;
