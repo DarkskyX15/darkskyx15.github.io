@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title>Form Example</title>
+    <link rel="stylesheet" type="text/css" href="css/mikustyle-basic.css" />
+    <link rel="stylesheet" type="text/css" href="css/mikustyle-cursor.css" />
+    <link rel="stylesheet" type="text/css" href="css/mikustyle-button.css" />
+    <link rel="stylesheet" type="text/css" href="css/mikustyle-form.css" />
+    <script src="js/mikustyle-cursor.js"></script>
+  </head>
+  <body style="background-color: aliceblue;">
+    <div class="form-container" style="left: 50%; top:5%">
+      <div class="form-background"></div>
+      <div class="form-title">Login</div>
+      <div class="form-content-warp">
+        <form class="css-form">
+          <div class="divide-line"></div>
+          <div class="input-div">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" class="text-input inputable" required/>
+          </div>
+          <div class="input-div">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="text-input inputable" required/>
+          </div>
+          <!-- <div class="radio-div">
+            <input type="radio" id="type3" name="type" value="3" checked/>
+            <label for="type3">3</label>
+          </div>
+          <div class="radio-div">
+            <input type="radio" id="type9" name="type" value="9"/>
+            <label for="type9">9</label>
+          </div> -->
+          <div class="css-button" style="left: 50%; --button-height-scale: 10px; --button-width-scale: 21px; --button-unit-scale: 10px">
+            <input type="submit" value="提交" class="styled-button clickable">
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
