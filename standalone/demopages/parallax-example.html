@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Parallax Example</title>
+        <link rel="stylesheet" type="text/css" href="css/mikustyle-cursor.css"/>
+        <link rel="stylesheet" type="text/css" href="css/mikustyle-parallax.css"/>
+        <script src="js/mikustyle-cursor.js"></script>
+        <script src="js/mikustyle-parallax.js"></script>
+    </head>
+    <body>
+        <div class="parallax-container" style="top: 50%; left: 50%; width: 40%; height: 70%; transform: translate(-50%, -50%);" data-usefc="true">
+            <div class="parallax-item" style="z-index: 0;" data-depth="10">10</div>
+            <div class="parallax-item" style="z-index: -1;" data-depth="40">40</div>
+            <div class="parallax-item" style="z-index: -2;" data-depth="80">80</div>
+        </div>
+        <div class="parallax-container" style="top: 20%; left: 20%; height: 100px; width: 100px;">
+            <div class="parallax-item" style="z-index: 0;" data-depth="5">10</div>
+            <div class="parallax-item" style="z-index: -1;" data-depth="20">40</div>
+            <div class="parallax-item" style="z-index: -2;" data-depth="40">80</div>
+        </div>
+        <div>
+            <p style="font-size: xx-large;" id="alpha">111</p>
+            <p style="font-size: xx-large;" id="beta">111</p>
+            <p style="font-size: xx-large;" id="gamma">111</p>
+        </div>
+    </body>
+</html>
