@@ -290,7 +290,7 @@
 <p><strong>暂不支持将含非ASCII编码的Bytes转化成string</strong></p>
 <h2 id="使用例"><a href="#使用例" class="headerlink" title="使用例"></a>使用例</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&quot;Base64.cpp&quot;</span></span></span><br><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    string input; cin &gt;&gt; input;</span><br><span class="line"></span><br><span class="line">    <span class="function">b64::Base64Coder <span class="title">b64coder</span><span class="params">(b64::url_safe)</span></span>;</span><br><span class="line">    <span class="function">b64::Bytes <span class="title">raw</span><span class="params">(input)</span>, coded, decoded</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 编码</span></span><br><span class="line">    coded &lt;&lt; b64coder &lt;&lt; b64::encode &lt;&lt; b64::<span class="built_in">Bytes</span>(input);</span><br><span class="line">    <span class="comment">// 字节数组转字符串</span></span><br><span class="line">    cout &lt;&lt; (<span class="built_in">string</span>() &lt;&lt; coded) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 解码</span></span><br><span class="line">    decoded &lt;&lt; b64coder &lt;&lt; b64::decode &lt;&lt; coded;</span><br><span class="line">    <span class="comment">// 字节数组转字符串</span></span><br><span class="line">    cout &lt;&lt; (<span class="built_in">string</span>() &lt;&lt; decoded) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a herf = "\standalone\resources\sourcecode\cpp\Base64.cpp" download>点击下载&#x3D;w&#x3D;</a></p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a href = "\standalone\resources\sourcecode\cpp\Base64.cpp" download>点击下载&#x3D;w&#x3D;</a></p>
 <p><em>喜欢重载运算符 &amp;&amp; 上C++课 导致的</em></p>
 
                 
@@ -512,12 +512,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Learn/">
-                        <span class="chip bg-color">Learn</span>
-                    </a>
-                    
                     <a href="/tags/CSS/">
                         <span class="chip bg-color">CSS</span>
+                    </a>
+                    
+                    <a href="/tags/Learn/">
+                        <span class="chip bg-color">Learn</span>
                     </a>
                     
                 </div>
