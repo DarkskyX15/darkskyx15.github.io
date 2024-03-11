@@ -52,13 +52,13 @@ div.form-container div.form-title
     text-align: var(--form-title-align);
     vertical-align: middle;
     color: var(--form-title-color);
-    animation: form-title-entry 0.5s 1s ease backwards;
+    animation: form-title-entry 0.5s 0.5s ease backwards;
     z-index: 1;
 }
 
 @keyframes form-title-entry{
-    0%      {opacity: 0; top: calc(var(--form-unit-scale) * 8);}
-    100%    {opacity: 1; top: calc(var(--form-unit-scale) * 7);}
+    0%      {opacity: 0; transform: translate(-50%, -70%);}
+    100%    {opacity: 1; }
 }
 
 
@@ -66,19 +66,19 @@ div.form-container div.form-title
 div.form-container div.form-content-warp
 {
     position: absolute;
-    left: 0px; top: calc(var(--form-unit-scale) * 7);
+    left: 50%; top: calc(var(--form-unit-scale) * 7);
+    transform: translateX(-50%);
     width: 100%;
     height: calc(var(--form-height-scale) * 40 - var(--form-unit-scale) * 7);
     border-radius: var(--form-unit-scale);
     background-color: var(--form-content-bgcolor);
-    animation: form-entry 0.5s 0.5s ease backwards;
+    animation: form-entry 0.5s ease backwards;
     z-index: 0;
 }
 
 @keyframes form-entry{
-    0% { opacity: 0; left: 5%; top: var(--form-unit-scale); width: 90%; 
-        height: calc(var(--form-height-scale) * 40 - var(--form-unit-scale));}
-    100% { opacity: 1; left: 0%; top: calc(var(--form-unit-scale) * 7); width: 100%; }
+    0% { opacity: 0; transform: translate(-50%, -20%) scale(90%, 100%);}
+    100% { opacity: 1;}
 }
 
 /* main form ^*/
@@ -88,7 +88,7 @@ div.form-container form.css-form
     left: 0%; top: 0%;
     width: 100%; height: 100%;
     background-color: transparent;
-    animation: form-container-appear 0.5s 1s ease backwards;
+    animation: form-container-appear 0.5s 0.5s ease backwards;
 }
 
 @keyframes form-container-appear{
