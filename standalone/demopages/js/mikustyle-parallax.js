@@ -96,20 +96,26 @@ addEventListener('load', () => {
     }
 
     else if (window.DeviceOrientationEvent){
+        var aa = document.getElementById("alpha");
+        var ab = document.getElementById("beta");
+        var ac = document.getElementById("gamma");
         addEventListener('deviceorientation', (ev) => {
             if (!initedOrient){
                 orientY = ev.beta;
                 orientX = ev.gamma;
                 initedOrient = true;
             }
-            offsetX = (orientX - ev.gamma) / maxOriX;
+            aa.innerHTML = `${orientX}, ${orientY}`;
+            offsetX = (ev.gamma - orientX) / maxOriX;
             if (offsetX < -1.0) offsetX = -1.0;
             if (offsetX > 1.0) offsetX = 1.0;
-            offsetY = (orientY - ev.beta) / maxOriY;
+            offsetY = (ev.beta - orientY) / maxOriY;
             if (offsetY < -1.0) offsetY = -1.0;
             if (offsetY > 1.0) offsetY = 1.0;
             offsetX *= windowX / 2;
             offsetY *= windowY / 2;
+            ab.innerHTML = offsetX;
+            ac.innerHTML = offsetY;
         });
     }
 
