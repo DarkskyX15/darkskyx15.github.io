@@ -5,6 +5,8 @@ var translateScale = 4; // 位移时系数，决定整体深度
 var baseLenCut = 1.0; // 最大距离系数，越小越容易达到最大值
 var sampleTime = 50; // 计算间隔，以毫秒计
 var maxDeg = 25; // 最大角度，以度数计
+var maxOriY = 15;
+var maxOriX = 60;
 var depthScaler = 0.0015; // 深度增加后缩小的比例系数
 
 
@@ -15,6 +17,7 @@ var useFullscreenTrack = new Array();
 var containerCenter = new Array();
 var containerBaseLen = new Array();
 var windowX, windowY, offsetX, offsetY, centerX, centerY, windowLen;
+var orientY, orientX, initedOrient = false;
 
 class Coord{
     constructor(x, y){
@@ -87,23 +90,30 @@ addEventListener('load', () => {
         addEventListener('mousemove', (ev) => {
             mouseX = ev.clientX;
             mouseY = ev.clientY;
+            offsetX = mouseX - centerX;
+            offsetY = mouseY - centerY;
         });
     }
 
     else if (window.DeviceOrientationEvent){
-        var ap = document.getElementById('alpha');
-        var ab = document.getElementById('beta');
-        var ag = document.getElementById('gamma');
         addEventListener('deviceorientation', (ev) => {
-            ap.innerHTML = ev.alpha;
-            ab.innerHTML = ev.beta;
-            ag.innerHTML = ev.gamma;
+            if (!initedOrient){
+                orientY = ev.beta;
+                orientX = ev.gamma;
+                initedOrient = true;
+            }
+            offsetX = (orientX - ev.gamma) / maxOriX;
+            if (offsetX < -1.0) offsetX = -1.0;
+            if (offsetX > 1.0) offsetX = 1.0;
+            offsetY = (orientY - ev.beta) / maxOriY;
+            if (offsetY < -1.0) offsetY = -1.0;
+            if (offsetY > 1.0) offsetY = 1.0;
+            offsetX *= windowX / 2;
+            offsetY *= windowY / 2;
         });
     }
 
     setInterval(() => {
-        offsetX = mouseX - centerX;
-        offsetY = mouseY - centerY;
         for (let index = 0; index < totContainer; index++){
             if (enableTrack[index] || useFullscreenTrack[index]){
                 let containOffsetX = mouseX - containerCenter[index].x;
