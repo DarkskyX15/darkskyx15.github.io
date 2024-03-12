@@ -5,8 +5,8 @@ var translateScale = 4; // 位移时系数，决定整体深度
 var baseLenCut = 1.0; // 最大距离系数，越小越容易达到最大值
 var sampleTime = 50; // 计算间隔，以毫秒计
 var maxDeg = 25; // 最大角度，以度数计
-var maxOriY = 60; //
-var maxOriX = 20; //
+var maxOriY = 60; // Y方向陀螺仪角度
+var maxOriX = 20; // X方向陀螺仪角度
 var depthScaler = 0.0015; // 深度增加后缩小的比例系数
 
 
@@ -96,16 +96,12 @@ addEventListener('load', () => {
     }
 
     else if (window.DeviceOrientationEvent){
-        var aa = document.getElementById("alpha");
-        var ab = document.getElementById("beta");
-        var ac = document.getElementById("gamma");
         addEventListener('deviceorientation', (ev) => {
             if (!initedOrient){
                 orientY = ev.beta;
                 orientX = ev.gamma;
                 if (Math.abs(orientX) > 0.01 && Math.abs(orientY) > 0.01) initedOrient = true;
             }
-            aa.innerHTML = `${orientX}, ${orientY}`;
             offsetX = (ev.gamma - orientX) / maxOriX;
             if (offsetX < -1.0) offsetX = -1.0;
             if (offsetX > 1.0) offsetX = 1.0;
@@ -114,8 +110,6 @@ addEventListener('load', () => {
             if (offsetY > 1.0) offsetY = 1.0;
             offsetX *= windowX / 2;
             offsetY *= windowY / 2;
-            ab.innerHTML = ev.beta;
-            ac.innerHTML = ev.gamma;
         });
     }
 
