@@ -5,8 +5,8 @@ var translateScale = 4; // 位移时系数，决定整体深度
 var baseLenCut = 1.0; // 最大距离系数，越小越容易达到最大值
 var sampleTime = 50; // 计算间隔，以毫秒计
 var maxDeg = 25; // 最大角度，以度数计
-var maxOriY = 90;
-var maxOriX = 20;
+var maxOriY = 60; //
+var maxOriX = 20; //
 var depthScaler = 0.0015; // 深度增加后缩小的比例系数
 
 
