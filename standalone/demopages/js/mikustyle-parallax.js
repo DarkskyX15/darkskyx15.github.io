@@ -114,8 +114,8 @@ addEventListener('load', () => {
             if (offsetY > 1.0) offsetY = 1.0;
             offsetX *= windowX / 2;
             offsetY *= windowY / 2;
-            ab.innerHTML = offsetX;
-            ac.innerHTML = offsetY;
+            ab.innerHTML = ev.beta;
+            ac.innerHTML = ev.gamma;
         });
     }
 
