@@ -1,7 +1,10 @@
-#pragma once
+
+#ifndef SKYLIB_BASE64_H
+#define SKYLIB_BASE64_H
+
 #include <iostream>
-#include <vector>
 #include <unordered_map>
+#include <vector>
 #include <queue>
 
 namespace Base64{
@@ -19,11 +22,11 @@ namespace Base64{
         }
 
         friend std::string& operator<< (std::string& __str, const Bytes& __bytes){
-            for (int i = 0; i < __bytes.len; ++i){ __str += static_cast<char>(__bytes.data_field[i]); }
+            for (int i = 0; i < __bytes.len; ++i){ __str.push_back(__bytes.data_field[i]);}
             return __str;
         }
         friend std::string& operator<< (std::string&& __str, const Bytes& __bytes){
-            for (int i = 0; i < __bytes.len; ++i){ __str += static_cast<char>(__bytes.data_field[i]); }
+            for (int i = 0; i < __bytes.len; ++i){ __str.push_back(__bytes.data_field[i]);}
             return __str;
         }
 
@@ -244,7 +247,11 @@ namespace Base64{
             int it = 0;
             while (it < __b.size() || this->buffer.size()){
                 if (this->buffer.size() < 6 && it < __b.size()){
-                    this->splitBytes(__b.at(it));
+                    short bit = __b.at(it);
+                    if (bit < 0){
+                        bit = bit + 129 + 127;
+                    }
+                    this->splitBytes(bit);
                     ++it;
                 }
                 contain->push_back(this->mapping[this->gatherBytes(6)]);
@@ -267,7 +274,11 @@ namespace Base64{
                     }
                 }
                 while (buffer.size() >= 8){
-                    contain->push_back(gatherBytes(8));
+                    short bit = gatherBytes(8);
+                    if (bit > 127) {
+                        bit = bit - 127 - 129;
+                    }
+                    contain->push_back(bit);
                 }
             }
             short tail = 0;
@@ -277,3 +288,5 @@ namespace Base64{
     };
 
 } namespace b64 = Base64;
+
+#endif /* SKYLIB_BASE64_H */
