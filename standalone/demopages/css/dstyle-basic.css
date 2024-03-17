@@ -1,0 +1,15 @@
+*
+{
+    box-sizing: border-box !important;
+    -webkit-user-drag: none;
+}
+
+/* fullscreen-div */
+div.dstyle-fullscreen-div
+{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

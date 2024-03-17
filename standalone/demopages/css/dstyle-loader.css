@@ -1,0 +1,175 @@
+/* loader */
+div.dstyle-loader
+{
+    --loder-back-size: 15vmax;
+    --loader-frame-color: #39c5bb;
+    --loader-tips-color: #39c5bb;
+    --loader-matrix-color: #39c5bb;
+    --loader-text-color: white;
+
+    position: absolute;
+    width: 30vmax;
+    height: 40vmax;
+    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: loader-breath 5s ease infinite
+}
+
+div.dstyle-loader div.dstyle-loader-back
+{
+    position: absolute;
+    width: var(--loder-back-size);
+    height: var(--loder-back-size);
+    background-color: var(--loader-frame-color);
+
+    z-index: 1;
+
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5%;
+    box-shadow: 0px 0px 1.5vmax rgba(0, 0, 0, 0.4);
+
+    opacity: 1;
+    animation: loader-back-animation 2s;
+}
+
+div.dstyle-loader div.dstyle-loader-tips
+{
+    user-select: none;
+    position: absolute;
+    top: 66%;
+    left: 0%;
+
+    width: 100%;
+    height: 10%;
+
+    animation: loader-tips-entry 2s ease;
+}
+
+div.dstyle-loader-tips>p
+{
+    position: absolute;
+    margin: 0px;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    color: var(--loader-tips-color);
+    font-size: calc(var(--loder-back-size) / 7);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    vertical-align: middle;
+    text-shadow: 1px 1px 1vmax rgba(0, 0, 0, 0.4);
+    animation: loader-tips-breath 5s ease infinite;
+}
+
+div.dstyle-loader-box
+{
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+}
+
+div.dstyle-loader-box-back
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--loader-text-color);
+    z-index: -1;
+}
+
+div.dstyle-loader-container
+{
+    position: absolute;
+    user-select: none;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0px 0px 1vmax rgba(0, 0, 0, 0.5) inset;
+}
+
+div.dstyle-loader-container table
+{
+    position: absolute;
+    user-select: none;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    table-layout: fixed;
+}
+
+div.dstyle-loader-container tr
+{
+    height: 50%;
+    user-select: none;
+}
+
+div.dstyle-loader-container td
+{
+    user-select: none;
+    vertical-align: middle;
+    text-align: center;
+    color: var(--loader-text-color);
+    font-size: calc(var(--loder-back-size) / 4.2);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+div.dstyle-loader-matrix
+{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+
+    height: 50%;
+    width: 50%;
+    z-index: 0;
+
+    background: var(--loader-matrix-color);
+    animation: matrix-animation 5s infinite;
+}
+
+@keyframes matrix-animation
+{
+    0%      {top: 0%;left: 0%;height: 50%;width: 50%;}
+    12.5%   {top: 0%;left: 0%;height: 50%;width: 75%;}
+    25%     {top: 0%;left: 50%;height: 50%;width: 50%;}
+    37.5%   {top: 0%;left: 50%;height: 70%;width: 50%;}
+    50%     {top: 50%;left: 50%;height: 50%;width: 50%;}
+    62.5%   {top: 50%;left: 30%;height: 50%;width: 70%;}
+    75%     {top: 50%;left: 0%;height: 50%;width: 50%;}
+    87.5%   {top: 30%;left: 0%;height: 70%;width: 50%;}
+    100%    {top: 0%;left: 0%;height: 50%;width: 50%;}
+}
+
+@keyframes loader-back-animation
+{
+    0%      {opacity: 0; top: 50%;}
+    100%    {opacity: 1; top: 40%;}
+}
+
+@keyframes loader-tips-entry
+{
+    0%      {opacity: 0; top: 60%;}
+    100%    {opacity: 1; top: 66%;}
+}
+
+@keyframes loader-tips-breath
+{
+    0%      {opacity: 0;}
+    50%     {opacity: 1;}
+    100%    {opacity: 0;}
+}
+
+@keyframes loader-breath
+{
+    0%      {top: 50%;}
+    50%     {top: 52%;}
+    100%    {top: 50%;}
+}

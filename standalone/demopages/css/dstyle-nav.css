@@ -1,0 +1,139 @@
+div.dstyle-nav
+{
+    --nav-unit: 16px;
+    --anime-time: 0.3s;
+    --nav-color-bg: #1db1a7;
+    --nav-color-fg: white;
+
+    -webkit-user-drag: none;
+    user-select: none;
+
+    transition: box-shadow 0.1s ease, opacity 0.1s ease, border-radius 0.5s ease;
+}
+
+div.dstyle-navSTtop
+{
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: calc(var(--nav-unit) * 5);
+    background-color: var(--nav-color-bg);
+}
+
+div.dstyle-nav div.dstyle-navSTfloat
+{
+
+}
+
+div.dstyle-nav div.dstyle-nav-title
+{
+    position: relative;
+}
+
+div.dstyle-nav div.dstyle-nav-content
+{
+
+}
+
+div.dstyle-navSTtop div.dstyle-nav-trigger
+{
+    position: relative;
+    background-color: transparent;
+    border-radius: 10%;
+    margin-top: calc(var(--nav-unit) * 0.75);
+    margin-left: calc(var(--nav-unit) * 1);
+    height: calc(var(--nav-unit) * 3.5);
+    width: calc(var(--nav-unit) * 1.5);
+    transition: background-color var(--anime-time) ease, 
+                box-shadow var(--anime-time) ease, scale var(--anime-time) ease, 
+                translate var(--anime-time) ease;
+
+}
+
+div.dstyle-navSTtop div.dstyle-nav-trigger-icondiv
+{
+    position: absolute;
+    height: 100%; width: 100%;
+    background-color: transparent;
+    transition: scale var(--anime-time) ease;
+}
+
+div.dstyle-navSTtop div.dstyle-nav-trigger:hover div.dstyle-nav-trigger-icondiv
+{
+    scale: 0.5 1;
+}
+
+div.dstyle-navSTtop div.dstyle-nav-trigger-icon1
+{
+    position: absolute;
+    width: calc(var(--nav-unit) * 2);
+    height: calc(var(--nav-unit) * 0.3);
+    left: 50%; top: 50%;
+    border-radius: calc(var(--nav-unit));
+    rotate: 90deg;
+    translate: -50% -50%;
+    background-color: var(--nav-color-fg);
+    transition: translate var(--anime-time) ease, rotate var(--anime-time) ease,
+                scale var(--anime-time) ease;
+}
+
+div.dstyle-navSTtop div.dstyle-nav-trigger-icon2
+{
+    position: absolute;
+    width: calc(var(--nav-unit) * 2);
+    height: calc(var(--nav-unit) * 0.3);
+    left: 50%; top: 50%;
+    border-radius: calc(var(--nav-unit));
+    rotate: 90deg;
+    translate: -50% -50%;
+    background-color: var(--nav-color-fg);
+    transition: translate var(--anime-time) ease, rotate var(--anime-time) ease,
+                scale var(--anime-time) ease;
+}
+
+div.dstyle-navSTtop div.dstyle-nav-trigger-icon3
+{
+    position: absolute;
+    width: calc(var(--nav-unit) * 2);
+    height: calc(var(--nav-unit) * 0.3);
+    left: 50%; top: 50%;
+    border-radius: calc(var(--nav-unit));
+    rotate: 90deg;
+    translate: -50% -50%;
+    background-color: var(--nav-color-fg);
+    transition: translate var(--anime-time) ease, rotate var(--anime-time) ease,
+                scale var(--anime-time) ease;
+}
+
+div.dstyle-navSTtop div.dstyle-nav-trigger:hover
+{
+    background-color: var(--nav-color-bg);
+    box-shadow: 0 0 calc(var(--nav-unit) / 3) rgba(0, 0, 0, 0.5);
+    scale: 2 1;
+    translate: 50% 0;
+}
+
+div.dstyle-navSTtop div.dstyle-nav-trigger:active
+{
+    box-shadow: 0 0 calc(var(--nav-unit) / 9) rgba(0, 0, 0, 0.5);
+}
+
+div.dstyle-navSTtop div.dstyle-nav-trigger:hover div.dstyle-nav-trigger-icon2
+{
+    translate: -45% -50%;
+    scale: 0.8 1;
+    rotate: 0deg;
+}
+
+div.dstyle-navSTtop div.dstyle-nav-trigger:hover div.dstyle-nav-trigger-icon1
+{
+    translate: -75% -150%;
+    scale: 0.5 1;
+    rotate: -45deg;
+}
+
+div.dstyle-navSTtop div.dstyle-nav-trigger:hover div.dstyle-nav-trigger-icon3
+{
+    translate: -75% 30%;
+    scale: 0.5 1;
+    rotate: 45deg;
+}

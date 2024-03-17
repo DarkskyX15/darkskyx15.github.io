@@ -2,21 +2,22 @@
 <html>
     <head>
         <title>Parallax Example</title>
-        <link rel="stylesheet" type="text/css" href="css/mikustyle-cursor.css"/>
-        <link rel="stylesheet" type="text/css" href="css/mikustyle-parallax.css"/>
-        <script src="js/mikustyle-cursor.js"></script>
-        <script src="js/mikustyle-parallax.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/dstyle-cursor.css"/>
+        <link rel="stylesheet" type="text/css" href="css/dstyle-parallax.css"/>
     </head>
     <body>
-        <div class="parallax-container" style="top: 50%; left: 50%; width: 40%; height: 70%; transform: translate(-50%, -50%);" data-usefc="true">
-            <div class="parallax-item" style="z-index: 0;" data-depth="10">10</div>
-            <div class="parallax-item" style="z-index: -1;" data-depth="40">40</div>
-            <div class="parallax-item" style="z-index: -2;" data-depth="80">80</div>
+        <div class="dstyle-parallax-out" style="top: 50%; left: 50%; width: 40%; height: 70%; transform: translate(-50%, -50%);" data-usefc="true" data-maxdeg="30">
+            <div class="dstyle-parallax-in" style="z-index: 0;" data-depth="10">10</div>
+            <div class="dstyle-parallax-in" style="z-index: -1;" data-depth="40">40</div>
+            <div class="dstyle-parallax-in" style="z-index: -2;" data-depth="80">80</div>
         </div>
-        <div class="parallax-container" style="top: 20%; left: 20%; height: 100px; width: 100px;">
-            <div class="parallax-item" style="z-index: 0;" data-depth="5">10</div>
-            <div class="parallax-item" style="z-index: -1;" data-depth="20">40</div>
-            <div class="parallax-item" style="z-index: -2;" data-depth="40">80</div>
+        <div class="dstyle-parallax-out" style="top: 20%; left: 20%; height: 100px; width: 100px;" data-maxdeg="10">
+            <div class="dstyle-parallax-in" style="z-index: 0;" data-depth="1">1</div>
+            <div class="dstyle-parallax-in" style="z-index: -1;" data-depth="4">4</div>
+            <div class="dstyle-parallax-in" style="z-index: -2;" data-depth="8">8</div>
         </div>
+        <script src="js/dstyle-basic.js"></script>
+        <script src="js/dstyle-cursor.js"></script>
+        <script src="js/dstyle-parallax.js"></script>
     </body>
 </html>

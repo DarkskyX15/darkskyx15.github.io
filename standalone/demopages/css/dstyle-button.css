@@ -1,0 +1,63 @@
+/* button ^*/
+div.dstyle-button
+{
+    --button-width-scale: 16px;
+    --button-height-scale: 16px;
+    --button-unit-scale: 16px;
+    --button-radius: 16px;
+    --button-frame-color: #39c5bb;
+    --button-hover-text-color: #5fc6bf;
+    --button-hover-background: #30afa6;
+    --button-active-text-color: #2ebcb3;
+    --button-active-background: #109f95;
+
+    -webkit-user-select: none;
+    user-select: none;
+    
+    position: relative;
+    background-color: transparent;
+    height: calc(var(--button-height-scale) * 5);
+    width: calc(var(--button-width-scale) * 15);
+    transform: translate(-50%, -50%);
+    border-radius: calc(var(--button-radius) * 5);
+    background-color: transparent;
+
+}
+
+div.dstyle-button button,
+div.dstyle-button .styled
+{
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%; top: 0px;
+    height: 100%; left: 0px;
+    border-color: var(--button-frame-color);
+    border-style: solid;
+    border-width: calc(var(--button-unit-scale) / 2.5);
+    border-radius: calc(var(--button-radius) * 5);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: calc(var(--button-unit-scale) * 2);
+    color: var(--button-frame-color);
+    font-weight: bold;
+    background-color: transparent;
+    transition: box-shadow 0.3s, text-shadow 0.3s, background-color 0.2s, color 0.2s;
+}
+
+div.dstyle-button button:hover,
+div.dstyle-button .styled:hover
+{
+    color: var(--button-hover-text-color);
+    text-shadow: 0px 0px 0.2vmax rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 0.4vmax rgba(0, 0, 0, 0.4);
+    background-color: var(--button-hover-background);
+}
+
+div.dstyle-button button:active, 
+div.dstyle-button .styled:active
+{
+    color: var(--button-active-text-color);
+    box-shadow: 0px 0px 0.1vmax rgba(0, 0, 0, 0.5);
+    text-shadow: 0px 0px 0.2vmax rgba(0, 0, 0, 0.4);
+    background-color: var(--button-active-background);
+}

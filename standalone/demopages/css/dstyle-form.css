@@ -1,0 +1,179 @@
+/* form */
+div.dstyle-form-container
+{
+    --component-z-index: 0;
+    --form-width-scale: 16px;
+    --form-height-scale: 16px;
+    --form-unit-scale: 16px;
+    --form-contain-color: transparent;
+    --form-bgimage: linear-gradient(110deg, #39c5bb 0%, #ffffff 100%);
+    --form-content-bgcolor: white;
+    --form-divide-img: linear-gradient(110deg, #39c5bb 0%, #ffffff 100%);
+    --form-title-align: left;
+    --form-title-color: #aafff9;
+    --form-deactive-color: rgb(182, 182, 182);
+    --form-active-color: #39c5bb;
+    --form-deactive-font-color: rgb(100, 100, 100);
+    --form-inputbg-color: rgba(57, 197, 187, 0.2);
+
+    position: relative;
+    width: calc(var(--form-width-scale) * 30);
+    height: calc(var(--form-height-scale) * 40);
+    background-color: var(--form-contain-color);
+}
+
+/* background ^*/
+div.dstyle-form-container div.dstyle-form-background
+{
+    position: relative;
+    top: 0px; left: 0px;
+    width: 100%; height: 100%;
+    border-radius: var(--form-unit-scale);
+    background-image: var(--form-bgimage);
+    box-shadow: 0px 0px calc(var(--form-unit-scale)) rgba(0, 0, 0, 0.3);
+    animation: form-container-appear 0.5s ease backwards;
+    z-index: calc(var(--component-z-index) + 0);
+}
+
+/* title ^*/
+div.dstyle-form-container div.dstyle-form-title
+{
+    position: absolute;
+    -webkit-user-select: none;
+    user-select: none;
+
+    left: 50%; top: calc(var(--form-unit-scale) * 7);
+    width: 85%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0px 0px calc(var(--form-unit-scale) / 4) rgba(0, 0, 0, 0.5);
+    font-size: calc(var(--form-unit-scale) * 3.5);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: var(--form-title-align);
+    vertical-align: middle;
+    color: var(--form-title-color);
+    animation: form-title-entry 0.5s 0.5s ease backwards;
+    z-index: calc(var(--component-z-index) + 1);
+}
+
+@keyframes form-title-entry{
+    0%      {opacity: 0; transform: translate(-50%, -70%);}
+    100%    {opacity: 1; }
+}
+
+
+/* content warp ^*/
+div.dstyle-form-container div.dstyle-form-content-warp
+{
+    position: absolute;
+    left: 50%; top: calc(var(--form-unit-scale) * 7);
+    transform: translateX(-50%);
+    width: 100%;
+    height: calc(var(--form-height-scale) * 40 - var(--form-unit-scale) * 7);
+    border-radius: var(--form-unit-scale);
+    background-color: var(--form-content-bgcolor);
+    animation: form-entry 0.5s ease backwards;
+    z-index: calc(var(--component-z-index) + 0);
+}
+
+@keyframes form-entry{
+    0% { opacity: 0; transform: translate(-50%, -20%) scale(90%, 100%);}
+    100% { opacity: 1;}
+}
+
+/* main form ^*/
+div.dstyle-form-container form.dstyle-form
+{
+    position: absolute;
+    left: 0%; top: 0%;
+    width: 100%; height: 100%;
+    background-color: transparent;
+    animation: form-container-appear 0.5s 0.5s ease backwards;
+}
+
+@keyframes form-container-appear{
+    0%      {opacity: 0;}
+    100%    {opacity: 1;}
+}
+
+/* divide line */
+form.dstyle-form div.dstyle-form-divide-line
+{
+    position: relative;
+    margin-top: calc(var(--form-unit-scale) * 2.8);
+    margin-bottom: calc(var(--form-unit-scale) * 4);
+    width: 100%; height: calc(var(--form-unit-scale) * 0.4);
+    background-image: var(--form-divide-img);
+}
+
+/* input div */
+form.dstyle-form div.dstyle-form-inputdiv
+{
+    position: relative;
+    left: 50%; width: calc(var(--form-unit-scale) * 20);
+    height: calc(var(--form-unit-scale) * 6);
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+}
+
+form.dstyle-form div.dstyle-form-inputdiv label
+{
+    position: absolute;
+    -webkit-user-select: none;
+    user-select: none;
+    padding-left: 1%;
+    left: 0px; height: 30%;
+    font-size: calc(var(--form-unit-scale) * 1.1);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    color: var(--form-deactive-color);
+    background-color: transparent;
+}
+
+form.dstyle-form div.dstyle-form-inputdiv input.text-input
+{
+    position: absolute;
+    top: 26%; left: 0%;
+    width: 100%; height: 50%;
+    padding-left: 3%; padding-right: 3%;
+    background-color: transparent;
+    border-radius: calc(var(--form-unit-scale) / 4);
+    border: calc(var(--form-unit-scale) / 4.5) solid var(--form-deactive-color);
+    caret-color: var(--form-active-color);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: calc(var(--form-unit-scale) * 1.6);
+    transition: border 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    color: var(--form-deactive-font-color);
+    outline: none;
+}
+
+form.dstyle-form div.dstyle-form-inputdiv input.text-input:hover
+{
+    border: calc(var(--form-unit-scale) / 15) solid var(--form-active-color);
+}
+
+form.dstyle-form div.dstyle-form-inputdiv input.text-input:focus
+{
+    border: calc(var(--form-unit-scale) / 15) solid var(--form-active-color);
+    background-color: var(--form-inputbg-color);
+    color: var(--form-active-color);
+}
+
+/* radio div */
+form.css-form div.radio-div
+{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: aqua;
+    width: 80%; height: 5%;
+}
+
+form.css-form div.radio-div label
+{
+    position: relative;
+}
+
+form.css-form div.radio-div input{
+    position: relative;
+}
