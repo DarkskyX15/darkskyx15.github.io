@@ -1,14 +1,26 @@
-DS_cursor_left = 0.0;
-DS_cursor_top = 0.0;
-var DS_motion_arg = 0.4;
-var DS_point_cnt = 10;
-var DS_inClickable = 0, DS_isPressed = 0, DS_movaBle = 1, DS_inInput = 0;
 
-function abs(_var){
-    return _var > 0 ? _var : -_var;
+const DS_motion_arg = 0.4; // 趋近速度
+const DS_point_cnt = 10; // 分裂圆点数
+
+let DS_cursor_left = 0.0;
+let DS_cursor_top = 0.0;
+
+let DS_TrackObjects = new Array();
+let DS_TrackObjRectLeft = new Array();
+let DS_TrackObjRectTop = new Array();
+let DS_TObjectLeft = new Array();
+let DS_TObjectTop = new Array();
+let DS_inClickable = 0, DS_isPressed = 0, DS_movaBle = 1, DS_inInput = 0, DS_cursorFolded = false;
+
+function DS_updateCursorRect(){
+    for (let index = 0; index < DS_TrackObjects.length; index++){
+        let rect = DS_TrackObjects[index].getBoundingClientRect();
+        DS_TrackObjRectLeft[index] = (rect.left - rect.right) / 2;
+        DS_TrackObjRectTop[index] = (rect.top - rect.bottom) / 2;
+    }
 }
 
-addEventListener('load', function(){
+addEventListener('load', () => {
     
     if (platform === 'win' || platform === 'linux'){
 
@@ -25,8 +37,9 @@ addEventListener('load', function(){
         cursor_outer.style.opacity = 0;
         cursor_effect.style.animationPlayState = 'paused';
 
-        cursor_contain.style.top = '0px';
-        cursor_contain.style.left = '0px';
+        cursor_contain.style.top = '0';
+        cursor_contain.style.left = '0';
+        cursor_contain.dataset.allowtrack = 'true';
 
         desttop = cursor_contain.offsetTop;
         destleft = cursor_contain.offsetLeft;
@@ -34,6 +47,10 @@ addEventListener('load', function(){
         cursor_contain.appendChild(cursor_outer);
         cursor_contain.appendChild(cursor_circle);
         
+        DS_TrackObjects.push(cursor_contain);
+        DS_TObjectLeft.push(cursor_contain.offsetLeft);
+        DS_TObjectTop.push(cursor_contain.offsetTop);
+
         document.body.appendChild(cursor_contain);
         document.body.appendChild(cursor_effect);
 
@@ -43,18 +60,33 @@ addEventListener('load', function(){
             DS_movaBle = 1;
         });
 
+        const tracking = document.querySelectorAll('.trackmouse');
         const selects = document.querySelectorAll('.clickable');
         const inputs = document.querySelectorAll('.inputable');
+
+        tracking.forEach(element => {
+            DS_TrackObjects.push(element);
+            DS_TObjectLeft.push(0);
+            DS_TObjectTop.push(0);
+        });
+
+        DS_TrackObjects.forEach(obj => {
+            let rect = obj.getBoundingClientRect();
+            DS_TrackObjRectLeft.push((rect.left - rect.right) / 2);
+            DS_TrackObjRectTop.push((rect.top - rect.bottom) / 2)
+        });
 
         selects.forEach(element => {
             element.addEventListener('mouseenter', function(){
                 DS_inClickable += 1;
-                cursor_outer.style.height = '3.5vmax';
-                cursor_outer.style.width = '3.5vmax';
-                cursor_circle.style.height = '3.5vmax';
-                cursor_circle.style.width = '3.5vmax';
-                cursor_circle.style.opacity = 0;
-                cursor_outer.style.opacity = 1;
+                if (DS_isPressed <= 0 || !DS_cursorFolded) {
+                    cursor_outer.style.height = '3.5vmax';
+                    cursor_outer.style.width = '3.5vmax';
+                    cursor_circle.style.height = '3.5vmax';
+                    cursor_circle.style.width = '3.5vmax';
+                    cursor_circle.style.opacity = 0;
+                    cursor_outer.style.opacity = 1;
+                }
             });
             element.addEventListener('mouseleave', function(){
                 DS_inClickable -= 1;
@@ -95,6 +127,14 @@ addEventListener('load', function(){
             cursor_outer.appendChild(newWarp);
         }
 
+        window.addEventListener('resize', () => {
+            for (let index = 0; index < DS_TrackObjects.length; index++){
+                let rect = DS_TrackObjects[index].getBoundingClientRect();
+                DS_TrackObjRectLeft[index] = (rect.left - rect.right) / 2;
+                DS_TrackObjRectTop[index] = (rect.top - rect.bottom) / 2;
+            }
+        });
+
         document.addEventListener('mousemove', function(ev){
             DS_cursor_left = ev.clientX;
             DS_cursor_top = ev.clientY;
@@ -106,6 +146,7 @@ addEventListener('load', function(){
                 if (DS_inClickable > 0){
                     cursor_outer.style.height = '1.2vmax';
                     cursor_outer.style.width = '1.2vmax';
+                    DS_cursorFolded = true;
                 }
                 else{
                     if (DS_movaBle > 0){
@@ -122,6 +163,7 @@ addEventListener('load', function(){
         addEventListener('mouseup', (ev)=>{
             if (ev.button === 0){
                 DS_isPressed = 0;
+                DS_cursorFolded = false;
                 if (DS_inClickable > 0){
                     cursor_outer.style.height = '3.5vmax';
                     cursor_outer.style.width = '3.5vmax';
@@ -139,13 +181,16 @@ addEventListener('load', function(){
             }
         });
 
-        setInterval(function(){
-            if ( abs(destleft - DS_cursor_left) <= 1){ destleft = DS_cursor_left; }
-            else{ destleft += (DS_cursor_left - destleft) * DS_motion_arg; }
-            if ( abs(desttop - DS_cursor_top) <= 1){ desttop = DS_cursor_top; }
-            else{ desttop += (DS_cursor_top - desttop) * DS_motion_arg; }
-            cursor_contain.style.left = destleft + 'px';
-            cursor_contain.style.top = desttop + 'px';
+        setInterval(() => {
+            for (let index = 0; index < DS_TrackObjects.length; index++) {
+                if (DS_TrackObjects[index].dataset.allowtrack === 'true'){
+                    if ( Math.abs(DS_TObjectLeft[index] - DS_cursor_left) <= 1){ DS_TObjectLeft[index] = DS_cursor_left; }
+                    else{ DS_TObjectLeft[index] += (DS_cursor_left - DS_TObjectLeft[index]) * DS_motion_arg; }
+                    if ( Math.abs(DS_TObjectTop[index] - DS_cursor_top) <= 1){ DS_TObjectTop[index] = DS_cursor_top; }
+                    else{ DS_TObjectTop[index] += (DS_cursor_top - DS_TObjectTop[index]) * DS_motion_arg; }
+                    DS_TrackObjects[index].style.translate = `${DS_TObjectLeft[index] + DS_TrackObjRectLeft[index]}px ${DS_TObjectTop[index] + DS_TrackObjRectTop[index]}px`;
+                }
+            }
         }, 25);
 
     }else if (platform != 'unknown'){

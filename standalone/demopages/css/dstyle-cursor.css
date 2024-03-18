@@ -10,9 +10,8 @@ div.cursor-container
     pointer-events: none;
     height: 3.5vmax;
     width: 3.5vmax;
-    transform: translate(-50%, -50%);
     animation: cursor-entry 1s ease;
-    transition: left 50ms ease, top 50ms ease;
+    transition: translate 50ms ease;
     z-index: 3939;
 }
 
