@@ -9,8 +9,12 @@ div.dstyle-parallax-in
 {
     position: absolute;
     height: 100%; width: 100%;
+    transition: translate var(--transition-time) ease, rotate var(--transition-time) ease;
+}
+
+div.dstyle-parallax-example
+{
     background-image: linear-gradient(110deg, #39c5bb 0%, #ffffff 100%);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    transition: translate var(--transition-time) ease, rotate var(--transition-time) ease;
     font-size: 200%;
 }

@@ -1,10 +1,12 @@
 
 const DS_motion_arg = 0.4; // 趋近速度
-const DS_point_cnt = 10; // 分裂圆点数
+const DS_point_cnt = 8; // 分裂圆点数
+let DS_cursorScale = 1.0; // 鼠标缩放
 
 let DS_cursor_left = 0.0;
 let DS_cursor_top = 0.0;
 
+let DS_cursorSizeMem = new Map();
 let DS_TrackObjects = new Array();
 let DS_TrackObjRectLeft = new Array();
 let DS_TrackObjRectTop = new Array();
@@ -20,9 +22,31 @@ function DS_updateCursorRect(){
     }
 }
 
+function DS_cursorReset(posX, posY, obj){
+    let index = DS_TrackObjects.findIndex((element) => {
+        if (element === obj) return true;
+    });
+    if (index != undefined) {
+        DS_TObjectLeft[index] = posX;
+        DS_TObjectTop[index] = posY;
+    }
+}
+
+function DS_cursorSizeGen(size){
+    let res = DS_cursorSizeMem.get(size);
+    if (res != undefined){
+        return res;
+    } else {
+        res = `${size * DS_cursorScale}vmax`;
+        DS_cursorSizeMem.set(size, res);
+        return res;
+    }
+}
+
 addEventListener('load', () => {
     
     if (platform === 'win' || platform === 'linux'){
+        DS_cursorScale = 0.7;
 
         let cursor_contain = document.createElement('div');
         cursor_contain.className = 'cursor-container';
@@ -40,6 +64,7 @@ addEventListener('load', () => {
         cursor_contain.style.top = '0';
         cursor_contain.style.left = '0';
         cursor_contain.dataset.allowtrack = 'true';
+        cursor_contain.style.setProperty('--cursor-scale', DS_cursorScale);
 
         desttop = cursor_contain.offsetTop;
         destleft = cursor_contain.offsetLeft;
@@ -80,10 +105,10 @@ addEventListener('load', () => {
             element.addEventListener('mouseenter', function(){
                 DS_inClickable += 1;
                 if (DS_isPressed <= 0 || !DS_cursorFolded) {
-                    cursor_outer.style.height = '3.5vmax';
-                    cursor_outer.style.width = '3.5vmax';
-                    cursor_circle.style.height = '3.5vmax';
-                    cursor_circle.style.width = '3.5vmax';
+                    cursor_outer.style.height = DS_cursorSizeGen(3.5);
+                    cursor_outer.style.width = DS_cursorSizeGen(3.5);
+                    cursor_circle.style.height = DS_cursorSizeGen(3.5);
+                    cursor_circle.style.width = DS_cursorSizeGen(3.5);
                     cursor_circle.style.opacity = 0;
                     cursor_outer.style.opacity = 1;
                 }
@@ -91,10 +116,10 @@ addEventListener('load', () => {
             element.addEventListener('mouseleave', function(){
                 DS_inClickable -= 1;
                 if (DS_isPressed <= 0){
-                    cursor_outer.style.height = '2vmax';
-                    cursor_outer.style.width = '2vmax';
-                    cursor_circle.style.height = '2.3vmax';
-                    cursor_circle.style.width = '2.3vmax';
+                    cursor_outer.style.height = DS_cursorSizeGen(2);
+                    cursor_outer.style.width = DS_cursorSizeGen(2);
+                    cursor_circle.style.height = DS_cursorSizeGen(2.3);
+                    cursor_circle.style.width = DS_cursorSizeGen(2.3);
                     cursor_circle.style.opacity = 1;
                     cursor_outer.style.opacity = 0;
                 }
@@ -105,14 +130,14 @@ addEventListener('load', () => {
             _input.addEventListener('mouseenter', () => {
                 DS_inInput += 1;
                 cursor_circle.style.opacity = '0.2';
-                cursor_circle.style.height = '1.2vmax';
-                cursor_circle.style.width = '1.2vmax';
+                cursor_circle.style.height = DS_cursorSizeGen(1.2);
+                cursor_circle.style.width = DS_cursorSizeGen(1.2);
             });
             _input.addEventListener('mouseleave', () => {
                 DS_inInput -= 1;
                 cursor_circle.style.opacity = '1';
-                cursor_circle.style.height = '2.3vmax';
-                cursor_circle.style.width = '2.3vmax';
+                cursor_circle.style.height = DS_cursorSizeGen(2.3);
+                cursor_circle.style.width = DS_cursorSizeGen(2.3);
             });
         });
 
@@ -144,8 +169,8 @@ addEventListener('load', () => {
             if (ev.button === 0){
                 DS_isPressed = 1;
                 if (DS_inClickable > 0){
-                    cursor_outer.style.height = '1.2vmax';
-                    cursor_outer.style.width = '1.2vmax';
+                    cursor_outer.style.height = DS_cursorSizeGen(1.2);
+                    cursor_outer.style.width = DS_cursorSizeGen(1.2);
                     DS_cursorFolded = true;
                 }
                 else{
@@ -165,16 +190,16 @@ addEventListener('load', () => {
                 DS_isPressed = 0;
                 DS_cursorFolded = false;
                 if (DS_inClickable > 0){
-                    cursor_outer.style.height = '3.5vmax';
-                    cursor_outer.style.width = '3.5vmax';
+                    cursor_outer.style.height = DS_cursorSizeGen(3.5);
+                    cursor_outer.style.width = DS_cursorSizeGen(3.5);
                 } 
                 else if (DS_inInput > 0){
                     
                 } else{
-                    cursor_outer.style.height = '2vmax';
-                    cursor_outer.style.width = '2vmax';
-                    cursor_circle.style.height = '2.3vmax';
-                    cursor_circle.style.width = '2.3vmax';
+                    cursor_outer.style.height = DS_cursorSizeGen(2);
+                    cursor_outer.style.width = DS_cursorSizeGen(2);
+                    cursor_circle.style.height = DS_cursorSizeGen(2.3);
+                    cursor_circle.style.width = DS_cursorSizeGen(2.3);
                     cursor_circle.style.opacity = 1;
                     cursor_outer.style.opacity = 0;
                 }
@@ -194,6 +219,8 @@ addEventListener('load', () => {
         }, 25);
 
     }else if (platform != 'unknown'){
+        DS_cursorScale = 1.0;
+
         let cursor_effect = document.createElement('div');
         cursor_effect.className = 'cursor-effect';
 

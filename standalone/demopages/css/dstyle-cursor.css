@@ -5,11 +5,12 @@ div.cursor-container
 {
     --cursor-unit: 0.2vmax;
     --cursor-color: rgb(57, 197, 187);
+    --cursor-scale: 1.0;
 
     position: fixed;
     pointer-events: none;
-    height: 3.5vmax;
-    width: 3.5vmax;
+    height: calc(3.5vmax * var(--cursor-scale));
+    width: calc(3.5vmax * var(--cursor-scale));
     animation: cursor-entry 1s ease;
     transition: translate 50ms ease;
     z-index: 3939;
@@ -22,7 +23,8 @@ div.cursor-container div.cursor-outer
     left: 50%; top: 50%;
     transform: translate(-50%, -50%);
     transform-origin: left top;
-    width: 2vmax; height: 2vmax;
+    width: calc(2vmax * var(--cursor-scale));
+    height: calc(2vmax * var(--cursor-scale));
     transition: height 0.3s ease, width 0.3s ease, opacity 0.2s ease;
     background-color: transparent;
     animation: cursor-point-rotate 4s linear infinite;
@@ -34,7 +36,8 @@ div.cursor-container div.cursor-circle
     position: absolute;
     pointer-events: inherit;
     top: 50%; left: 50%;
-    height: 2.3vmax; width: 2.3vmax;
+    height: calc(2.3vmax * var(--cursor-scale)); 
+    width: calc(2.3vmax * var(--cursor-scale));
     transform: translate(-50%, -50%);
     background-color: transparent;
     border-radius: 50%;
@@ -78,7 +81,8 @@ div.cursor-effect
     pointer-events: none;
     transform: translate(-50%, -50%);
     transform-origin: left top;
-    height: 2.8vmax; width: 2.8vmax;
+    height: calc(2.8vmax * var(--cursor-scale));
+    width: calc(2.8vmax * var(--cursor-scale));
     border-radius: 50%;
     border-style: solid;
     border-color: rgb(57, 197, 187);

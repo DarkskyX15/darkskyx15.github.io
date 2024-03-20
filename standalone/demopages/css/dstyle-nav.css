@@ -4,8 +4,11 @@ div.dstyle-nav
     --anime-time: 0.3s;
     --nav-color-bg: #1db1a7;
     --nav-color-fg: white;
+    --nav-link-bg: aliceblue;
+    --nav-link-border: rgb(218, 218, 218);
 
     -webkit-user-drag: none;
+    -webkit-user-select: none;
     user-select: none;
     pointer-events: none;
 
@@ -23,7 +26,8 @@ div.dstyle-navSTtop
 }
 
 div.dstyle-navSTdrag, 
-div.dstyle-navSTbubble
+div.dstyle-navSTbubble, 
+div.dstyle-navSTunfold
 {
     top:0; left: 0;
     width: 100%; height: calc(var(--nav-unit) * 5);
@@ -57,29 +61,47 @@ div.dstyle-nav div.dstyle-nav-content
     left: 50%; top: 0;
     height: 100%; width: 50%;
     background-color: transparent;
-}
-
-/* bubble Container */
-div.dstyle-nav-bubble-container a
-{
-    position: relative;
-    display: block;
-    text-align: center;
-    padding-top: 3%;
-    height: calc(var(--nav-unit) * 2.5);
-    width: 80%; left: 10%;
-    background-color: aliceblue;
-    color: #1db1a7;
+    overflow: hidden;
 }
 
 /* nav STatus top */
+div.dstyle-navSTtop div.dstyle-nav-reset, 
+div.dstyle-navSTbubble div.dstyle-nav-reset,
+div.dstyle-navSTdrag div.dstyle-nav-reset
+{
+    position: absolute; z-index: 2;
+    opacity: 0; pointer-events: none;
+    height: calc(var(--nav-unit) * 1.0);
+    width: calc(var(--nav-unit) * 1.0);
+    color: transparent; border-radius: 50%;
+    background-color: var(--nav-color-bg);
+    transition: opacity var(--anime-time) ease;
+}
 
 div.dstyle-navSTtop div.dstyle-nav-bubble-container
 {
     position: absolute;
-    opacity: 1; pointer-events: none;
-    height: auto; width: calc(var(--nav-unit) * 15);
-    background-color: aqua;
+    opacity: 0; pointer-events: none;
+    height: auto; width: calc(var(--nav-unit) * 13);
+    background-color: transparent;
+    border-radius: calc(var(--nav-unit) / 3);
+    transition: opacity var(--anime-time) ease, 
+                scale var(--anime-time) ease, 
+                background-color var(--anime-time) ease;
+}
+
+div.dstyle-navSTbubble div.dstyle-nav-bubble-container, 
+div.dstyle-navSTdrag div.dstyle-nav-bubble-container
+{
+    position: absolute;
+    opacity: 0; pointer-events: none;
+    height: auto; width: calc(var(--nav-unit) * 13);
+    scale: 0.5 0; background-color: transparent;
+    border-radius: calc(var(--nav-unit) / 3);
+    transition: opacity var(--anime-time) ease, 
+                scale var(--anime-time) ease, 
+                background-color var(--anime-time) ease
+                box-shadow var(--anime-time) ease;
 }
 
 div.dstyle-navSTtop div.dstyle-nav-container
@@ -198,8 +220,22 @@ div.dstyle-navSTtop div.dstyle-nav-trigger:hover div.dstyle-nav-trigger-icon3
 
 /* nav STatus bubble */
 
+div.dstyle-navSTbubble div.dstyle-nav-bubble-container, 
+div.dstyle-navSTdrag div.dstyle-nav-bubble-container
+{
+    position: absolute;
+    opacity: 0; pointer-events: none;
+    height: auto; width: calc(var(--nav-unit) * 13);
+    scale: 0.5 0; background-color: transparent;
+    border-radius: calc(var(--nav-unit) / 3);
+    transition: opacity var(--anime-time) ease, 
+                scale var(--anime-time) ease, 
+                background-color var(--anime-time) ease;
+}
+
 div.dstyle-navSTdrag div.dstyle-nav-container,
-div.dstyle-navSTbubble div.dstyle-nav-container
+div.dstyle-navSTbubble div.dstyle-nav-container, 
+div.dstyle-navSTunfold div.dstyle-nav-container
 {
     width: 100%; height: 100%;
     opacity: 0;
@@ -208,29 +244,11 @@ div.dstyle-navSTbubble div.dstyle-nav-container
     transition: scale calc(var(--anime-time) * 1.5) ease, opacity var(--anime-time) ease;
 }
 
-div.dstyle-navSTdrag div.dstyle-nav-trigger
-{
-    position: absolute;
-    pointer-events: all;
-    background-color: #1db1a7;
-    box-shadow: calc(var(--nav-unit) / 5) calc(var(--nav-unit) / 5) 
-                calc(var(--nav-unit) / 3) rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    height: calc(var(--nav-unit) * 3.5);
-    width: calc(var(--nav-unit) * 3.5);
-    scale: 1 1;
-    transition: background-color var(--anime-time) ease, 
-                border-radius var(--anime-time) ease,
-                box-shadow var(--anime-time) ease,
-                translate 50ms ease;
-    z-index: 1;
-}
-
 div.dstyle-navSTbubble div.dstyle-nav-trigger
 {
     position: absolute;
     pointer-events: all;
-    background-color: #1db1a7;
+    background-color: var(--nav-color-bg);
     box-shadow: calc(var(--nav-unit) / 5) calc(var(--nav-unit) / 5) 
                 calc(var(--nav-unit) / 3) rgba(0, 0, 0, 0.3);
     border-radius: 50%;
@@ -241,13 +259,15 @@ div.dstyle-navSTbubble div.dstyle-nav-trigger
     transition: background-color var(--anime-time) ease, 
                 border-radius var(--anime-time) ease,
                 box-shadow var(--anime-time) ease, 
-                translate var(--anime-time) ease, 
-                left var(--anime-time) ease, top var(--anime-time) ease;
+                translate var(--anime-time) ease, scale var(--anime-time) ease,
+                left var(--anime-time) ease, top var(--anime-time) ease,
+                width var(--anime-time) ease;
     z-index: 1;
 }
 
 div.dstyle-navSTdrag div.dstyle-nav-trigger-icondiv,
-div.dstyle-navSTbubble div.dstyle-nav-trigger-icondiv
+div.dstyle-navSTbubble div.dstyle-nav-trigger-icondiv, 
+div.dstyle-navSTunfold div.dstyle-nav-trigger-icondiv
 {
     width: 100%; height: 100%;
     background-color: transparent;
@@ -319,6 +339,24 @@ div.dstyle-navSTdrag div.dstyle-nav-trigger
                 calc(var(--nav-unit) / 2) rgba(0, 0, 0, 0.5);
 }
 
+div.dstyle-navSTdrag div.dstyle-nav-trigger
+{
+    position: absolute;
+    pointer-events: all;
+    background-color: #1db1a7;
+    box-shadow: calc(var(--nav-unit) / 5) calc(var(--nav-unit) / 5) 
+                calc(var(--nav-unit)) rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    height: calc(var(--nav-unit) * 3.5);
+    width: calc(var(--nav-unit) * 3.5);
+    scale: 1 1;
+    transition: background-color var(--anime-time) ease, 
+                border-radius var(--anime-time) ease,
+                box-shadow var(--anime-time) ease,
+                translate 50ms ease;
+    z-index: 1;
+}
+
 div.dstyle-navSTdrag div.dstyle-nav-trigger-icon1
 {
     position: absolute;
@@ -361,4 +399,172 @@ div.dstyle-navSTdrag div.dstyle-nav-trigger-icon3
     background-color: var(--nav-color-fg);
     transition: translate var(--anime-time) ease, rotate var(--anime-time) ease,
                 scale var(--anime-time) ease;
+}
+
+/* nav STatus unfold */
+div.dstyle-navSTunfold div.dstyle-nav-reset
+{
+    position: absolute; z-index: 2;
+    opacity: 1; pointer-events: all;
+    height: calc(var(--nav-unit) * 1.0);
+    width: calc(var(--nav-unit) * 1.0);
+    border-radius: 50%; transform-origin: center;
+    background-color: var(--nav-color-bg);
+    transition: opacity var(--anime-time) ease, 
+                scale var(--anime-time) ease, 
+                box-shadow var(--anime-time) ease;
+}
+
+div.dstyle-nav-reset div.dstyle-nav-reset-icon
+{
+    position: absolute; border-radius: 50%;
+    left: 50%; top: 50%; translate: -50% -50%;
+    height: calc(var(--nav-unit) * 0.4);
+    width: calc(var(--nav-unit) * 0.4);
+    background-color: var(--nav-color-fg);
+    transition: scale var(--anime-time) ease, 
+                border-radius var(--anime-time) ease;
+}
+
+div.dstyle-navSTunfold div.dstyle-nav-reset:hover
+{
+    color: var(--nav-color-fg);
+    box-shadow: 0 0 calc(var(--nav-unit) / 3) rgba(0, 0, 0, 0.4);
+    scale: 2.5 2.5;
+}
+
+div.dstyle-nav-reset:hover div.dstyle-nav-reset-icon
+{
+    position: absolute;
+    left: 50%; top: 50%; translate: -50% -50%;
+    height: calc(var(--nav-unit) * 0.4);
+    width: calc(var(--nav-unit) * 0.4);
+    scale: 1.8 0.4; border-radius: 0;
+    background-color: var(--nav-color-fg);
+    transition: scale var(--anime-time) ease, 
+                border-radius var(--anime-time) ease;
+}
+
+div.dstyle-navSTunfold div.dstyle-nav-bubble-container
+{
+    position: absolute;
+    opacity: 1; pointer-events: all;
+    height: auto; width: calc(var(--nav-unit) * 13);
+    scale: 1 1; background-color: var(--nav-color-bg);
+    border-radius: calc(var(--nav-unit) / 3);
+    box-shadow: 0 0 calc(var(--nav-unit) / 3) rgba(0, 0, 0, 0.3);
+    transition: opacity var(--anime-time) ease, 
+                scale var(--anime-time) ease, 
+                background-color var(--anime-time) ease, 
+                box-shadow var(--anime-time) ease;
+}
+
+div.dstyle-navSTunfold div.dstyle-nav-trigger
+{
+    position: absolute;
+    pointer-events: all;
+    background-color: var(--nav-color-bg);
+    box-shadow: 0 0 calc(var(--nav-unit) / 4) rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    height: calc(var(--nav-unit) * 3.5);
+    width: calc(var(--nav-unit) * 3.5);
+    left: 0; top: 0;
+    scale: 1 1;
+    transition: background-color var(--anime-time) ease, 
+                border-radius var(--anime-time) ease,
+                box-shadow var(--anime-time) ease, 
+                translate var(--anime-time) ease;
+    z-index: 1;
+}
+
+div.dstyle-navSTunfold div.dstyle-nav-trigger-icon1
+{
+    position: absolute;
+    width: calc(var(--nav-unit) * 1.5);
+    height: calc(var(--nav-unit) * 0.3);
+    left: 50%; top: 50%; rotate: -45deg;
+    border-radius: calc(var(--nav-unit));
+    translate: -50% -50%; scale: 1.4 1;
+    background-color: var(--nav-color-fg);
+    transition: translate var(--anime-time) ease, rotate var(--anime-time) ease,
+                scale var(--anime-time) ease;
+}
+
+div.dstyle-navSTunfold div.dstyle-nav-trigger-icon2
+{
+    position: absolute;
+    width: calc(var(--nav-unit) * 1.5);
+    height: calc(var(--nav-unit) * 0.3);
+    left: 50%; top: 50%;
+    border-radius: calc(var(--nav-unit));
+    scale: 0 1; translate: -50% -50%;
+    background-color: var(--nav-color-fg);
+    transition: translate var(--anime-time) ease, rotate var(--anime-time) ease,
+                scale var(--anime-time) ease, border var(--anime-time) ease, 
+                height var(--anime-time) ease, width var(--anime-time) ease;
+}
+
+div.dstyle-navSTunfold div.dstyle-nav-trigger-icon3
+{
+    position: absolute;
+    width: calc(var(--nav-unit) * 1.5);
+    height: calc(var(--nav-unit) * 0.3);
+    left: 50%; top: 50%; rotate: 45deg;
+    border-radius: calc(var(--nav-unit));
+    translate: -50% -50%; scale: 1.4 1;
+    background-color: var(--nav-color-fg);
+    transition: translate var(--anime-time) ease, rotate var(--anime-time) ease,
+                scale var(--anime-time) ease;
+}
+
+/* bubble Container */
+div.dstyle-nav-bubble-container a
+{
+    position: relative; display: block;
+    text-align: center; padding-top: 4%;
+    text-decoration: none;
+    border-top: 1px var(--nav-link-border) solid;
+    border-bottom: 1px var(--nav-link-border) solid;
+    font-family: Arial, Helvetica, sans-serif;
+     font-size: calc(var(--nav-unit) * 1.4);
+    height: calc(var(--nav-unit) * 2.5);
+    width: 80%; left: 10%;
+    background-color: var(--nav-link-bg);
+    color: var(--nav-color-bg);
+    transition: box-shadow var(--anime-time) ease, 
+                scale var(--anime-time) ease;
+    z-index: 0;
+}
+
+div.dstyle-nav-bubble-container a:hover
+{   
+    scale: 1.1 1.1;
+    box-shadow: 0 0 calc(var(--nav-unit) / 2) rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+/* normal container */
+
+div.dstyle-nav-content a
+{
+    text-decoration: none;
+    margin-right: var(--nav-unit);
+    padding-left: calc(var(--nav-unit));
+    padding-right: calc(var(--nav-unit));
+    padding-top: calc(var(--nav-unit) * 1.4);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    display: block; height: 90%;
+    position: relative; top: 5%;
+    background-color: transparent;
+    color: var(--nav-color-fg);
+    float: right; border-radius: calc(var(--nav-unit) * 0.5);
+    transition: background-color var(--anime-time) ease, 
+                box-shadow var(--anime-time) ease;
+}
+
+div.dstyle-nav-content a:hover
+{
+    background-color: var(--nav-color-bg);
+    box-shadow: 0 0 var(--nav-unit) rgba(0, 0, 0, 0.4);
 }
