@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SkyLib, Blog">
-    <meta name="description" content="提供一些工具类的Python模块（现在还不是模块）">
+    <meta name="keywords" content="KNN_CPP, Blog">
+    <meta name="description" content="KNN with C++">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>SkyLib | Blog</title>
+    <title>KNN_CPP | Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -203,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">SkyLib</h1>
+                    <h1 class="description center-align post-title">KNN_CPP</h1>
                 </div>
             </div>
         </div>
@@ -232,12 +232,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Projects/">
-                                <span class="chip bg-color">Projects</span>
+                            <a href="/tags/Cpp/">
+                                <span class="chip bg-color">Cpp</span>
                             </a>
                         
-                            <a href="/tags/Python/">
-                                <span class="chip bg-color">Python</span>
+                            <a href="/tags/Projects/">
+                                <span class="chip bg-color">Projects</span>
                             </a>
                         
                     </div>
@@ -252,8 +252,8 @@
                                 Projects
                             </a>
                         
-                            <a href="/categories/Projects/Python/" class="post-category">
-                                Python
+                            <a href="/categories/Projects/Cpp/" class="post-category">
+                                Cpp
                             </a>
                         
                     </div>
@@ -265,7 +265,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-02-27
+                    2024-04-02
                 </div>
                 
 
@@ -286,9 +286,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="SkyLib"><a href="#SkyLib" class="headerlink" title="SkyLib"></a>SkyLib</h1><p><em>提供一些可能有用的工具类</em><br>使用时请将文件放置在同一文件夹内并作为模块使用。<br>GitHub: <a target="_blank" rel="noopener" href="https://github.com/DarkskyX15/skylib">网页链接</a>  </p>
-<h2 id="Logger"><a href="#Logger" class="headerlink" title="Logger"></a>Logger</h2><p>多线程多进程支持，带颜色输出的日志输出器<br><a href="\standalone\skylib\logger\light">文档链接</a>  </p>
-<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><p>简单的配置文件支持<br><a href="\standalone\skylib\config\">文档链接</a></p>
+                <h1 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h1><p><em>使用C++编写的KNN操作与工具</em></p>
+<h2 id="使用例"><a href="#使用例" class="headerlink" title="使用例"></a>使用例</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @Date: 2024-03-28 20:53:03</span></span><br><span class="line"><span class="comment"> * @Author: DarkskyX15</span></span><br><span class="line"><span class="comment"> * @LastEditTime: 2024-04-02 08:10:15</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;KNN.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> knn;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">long</span> <span class="type">long</span> dimension = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">    std::vector&lt;std::pair&lt;<span class="type">int</span>, <span class="type">double</span>&gt;&gt; bkq;</span><br><span class="line">    <span class="comment">// 读取数据集</span></span><br><span class="line">    <span class="function">DefaultDataSet&lt;<span class="type">double</span>, <span class="type">int</span>&gt; <span class="title">data_set</span><span class="params">(dimension)</span></span>;</span><br><span class="line">    <span class="built_in">readDatasetFile</span>(<span class="string">&quot;iris.txt&quot;</span>, data_set, <span class="built_in">DefaultReadLine</span>&lt;<span class="type">double</span>, <span class="type">int</span>&gt;(<span class="string">&#x27;\t&#x27;</span>, dimension));</span><br><span class="line">    <span class="comment">// 标准化</span></span><br><span class="line">    data_set.<span class="built_in">zScoreNormalization</span>();</span><br><span class="line">    <span class="comment">// 获取最优K</span></span><br><span class="line">    <span class="built_in">optimizeKDTree</span>&lt;<span class="type">double</span>, <span class="type">double</span>, <span class="type">int</span>&gt;(data_set, <span class="number">1000</span>, <span class="number">1</span>, <span class="number">20</span>, <span class="number">20</span>, <span class="number">10</span>, bkq);</span><br><span class="line">    <span class="comment">// 输出最优K列表</span></span><br><span class="line">    <span class="comment">// for (auto it = bkq.begin(); it != bkq.end(); ++it) &#123;</span></span><br><span class="line">    <span class="comment">//     std::cout &lt;&lt; it-&gt;first &lt;&lt; &#x27; &#x27; &lt;&lt; it-&gt;second &lt;&lt; &#x27;\n&#x27;;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// std::cout &lt;&lt; std::endl;</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> k = bkq.<span class="built_in">at</span>(<span class="number">0</span>).first;</span><br><span class="line">    std::vector&lt;<span class="type">const</span> Record&lt;<span class="type">double</span>, <span class="type">int</span>&gt;*&gt; result;</span><br><span class="line">    <span class="function">KDTree&lt;<span class="type">double</span>, <span class="type">double</span>, <span class="type">int</span>&gt; <span class="title">knn</span><span class="params">(data_set)</span></span>;</span><br><span class="line">    <span class="comment">// 查询</span></span><br><span class="line">    knn.<span class="built_in">get</span>(&#123;<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>&#125;, k, result);</span><br><span class="line">    <span class="built_in">collectResult</span>(result, <span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+<li>暴力法与KD树法的KNN</li>
+<li>数据集的基类与实现的默认数据集</li>
+<li>可选z-score标准化的默认数据集</li>
+<li>可自定义的距离函数和权重函数</li>
+<li>更好的数据集读入设计，实现的默认支持类csv格式的读入函数</li>
+</ul>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a herf=".\standalone\resources\sourcecode\cpp\KNN.hpp" download>点击下载&#x3D;w&#x3D;</a></p>
 
                 
             </div>
@@ -315,7 +323,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://blog.wscraft.fun/Projects/Python/SkyLib-8b17b5a289c1/">http://blog.wscraft.fun/Projects/Python/SkyLib-8b17b5a289c1/</a>
+                    <a href="http://blog.wscraft.fun/Projects/Cpp/knn_cpp-3b52b2f4614c/">http://blog.wscraft.fun/Projects/Cpp/knn_cpp-3b52b2f4614c/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -353,12 +361,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Projects/">
-                                    <span class="chip bg-color">Projects</span>
+                                <a href="/tags/Cpp/">
+                                    <span class="chip bg-color">Cpp</span>
                                 </a>
                             
-                                <a href="/tags/Python/">
-                                    <span class="chip bg-color">Python</span>
+                                <a href="/tags/Projects/">
+                                    <span class="chip bg-color">Projects</span>
                                 </a>
                             
                         </div>
@@ -404,58 +412,56 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/Learn/Programming/CSS/css-learn-567e4b585400/">
+                <a href="/Projects/Cpp/knn_cpp-3b52b2f4614c/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Learn CSS">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="KNN_CPP">
                         
-                        <span class="card-title">Learn CSS</span>
+                        <span class="card-title">KNN_CPP</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前端真好玩b（￣▽￣）d　
+                            KNN with C++
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-03-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Learn/" class="post-category">
-                                    Learn
+                            <a href="/categories/Projects/" class="post-category">
+                                    Projects
                                 </a>
                             
-                            <a href="/categories/Learn/Programming/" class="post-category">
-                                    Programming
-                                </a>
-                            
-                            <a href="/categories/Learn/Programming/CSS/" class="post-category">
-                                    CSS
+                            <a href="/categories/Projects/Cpp/" class="post-category">
+                                    Cpp
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Learn/">
-                        <span class="chip bg-color">Learn</span>
+                    <a href="/tags/Cpp/">
+                        <span class="chip bg-color">Cpp</span>
                     </a>
                     
-                    <a href="/tags/CSS/">
-                        <span class="chip bg-color">CSS</span>
+                    <a href="/tags/Projects/">
+                        <span class="chip bg-color">Projects</span>
                     </a>
                     
                 </div>
@@ -469,38 +475,34 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/Learn/Programming/Cpp/cppnotes-efe162459f1c/">
+                <a href="/Projects/Cpp/base64-cpp-0db912c0ff33/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="CPPNotes">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Base64_CPP">
                         
-                        <span class="card-title">CPPNotes</span>
+                        <span class="card-title">Base64_CPP</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            C++学习笔记（更新至2024-02-26）
+                            Base64 encode & decode with C++
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-02-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-15
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Learn/" class="post-category">
-                                    Learn
+                            <a href="/categories/Projects/" class="post-category">
+                                    Projects
                                 </a>
                             
-                            <a href="/categories/Learn/Programming/" class="post-category">
-                                    Programming
-                                </a>
-                            
-                            <a href="/categories/Learn/Programming/Cpp/" class="post-category">
+                            <a href="/categories/Projects/Cpp/" class="post-category">
                                     Cpp
                                 </a>
                             
@@ -515,8 +517,8 @@
                         <span class="chip bg-color">Cpp</span>
                     </a>
                     
-                    <a href="/tags/Learn/">
-                        <span class="chip bg-color">Learn</span>
+                    <a href="/tags/Projects/">
+                        <span class="chip bg-color">Projects</span>
                     </a>
                     
                 </div>
